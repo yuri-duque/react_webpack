@@ -28,7 +28,9 @@ yarn-error.log*
 /dist
 ```
 
-In the end we will have these files: ![image](https://github.com/yuri-duque/react_ts_webpack/assets/26638073/bafefb21-dedf-4623-8c4d-7fb01f3daf73)
+In the end we will have these files: 
+
+![image](https://github.com/yuri-duque/react_ts_webpack/assets/26638073/bafefb21-dedf-4623-8c4d-7fb01f3daf73)
 
 
 ## Initializing typescript
