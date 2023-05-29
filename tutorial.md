@@ -1,3 +1,4 @@
+
 # Creating a minimal react typescript with webpack
 
 Hi! In this document, I created a tutorial to show how to create a project with a minimal setup for a typescript react project with webpack.
@@ -155,10 +156,118 @@ In the end we will have this files:
 
 
 
+## Initializing webpack
+
+### Add dependencies
+To start to configure webpack we need install many dependencies, so execute this command to install it:
+
+```
+npm i -D webpack webpack-cli webpack-dev-server @types/node @types/webpack @types/webpack-dev-server
+```
+
+### Creating a webpack config
+To configure a webpack we need to have a file with all configurations, to inform to browser where is the packs with the js and html, and another things.
+
+So create a `webpack.config.ts` file.
+
+file name: `webpack.config.ts`
+```
+import webpack, {Configuration} from "webpack";
+
+const webpackConfig = (env): Configuration => ({
+});
+
+export default webpackConfig;
+```
+
+###  Configuring the entry file
+
+The first step for webpack config, we need to set the entry point, what file the webpack will analyse to compile. In our case we will set the `src/index.tsx`.
+
+file name: `webpack.config.ts`
+```
+...
+const webpackConfig = (env): Configuration => ({
+  entry:  path.resolve(__dirname, './src/index.tsx'),
+});
+...
+```
+
+### Configuring the module
+On the webpack we need configure the a module section, that the webpack use loaders to build files by modules. 
 
 
+**babel**
+
+On module that we will use is the babel, to configure, first we need install some dependencies:
+
+```
+npm i -D babel-loader @babel/plugin-proposal-class-properties @babel/preset-env @babel/preset-react @babel/preset-typescript
+```
+
+After install the dependencies we need to crete a `.babelrc` file, and set some configs
+
+file name: `.babelrc` 
+```
+{
+    "presets": [
+        "@babel/preset-env",
+        "@babel/preset-typescript",
+        "@babel/preset-react"
+    ],
+    "plugins": [
+        "@babel/plugin-proposal-class-properties"
+    ]
+}
+```
+
+And now we need configure the webpack to use the babel.
+
+file name: `webpack.config.ts`
+```
+const  webpackConfig  = (env):  Configuration  => ({
+...
+	module: {
+	   rules: [
+	     {
+	       test: /\.(js|jsx|tsx|ts)$/,
+	       exclude: /node_modules/,
+	       use: ['babel-loader'],
+	     },
+	   ],
+	 },
+...
+});
+```
+
+### Configure plugins
+
+On the webpack we have a plugin section, in this example we will use some plugins:
+
+**html-webpack-plugin**
+This plugins is responsable to simplify the criation for html files.
+
+`npm i -d html-webpack-plugin`
+
+file name: `webpack.config.ts`
+```
+const  webpackConfig  = (env):  Configuration  => ({
+...
+	plugins: [
+	   new HtmlWebpackPlugin({
+	     template: path.resolve(__dirname, './public/index.html'), 
+	   }),
+	 ],
+...
+});
+```
 
 
+**clean-webpack-plugin**
+
+**HotModuleReplacementPlugin**
+
+**tsconfig-paths-webpack-plugin**
 
 
 
