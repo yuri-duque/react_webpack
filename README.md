@@ -302,5 +302,16 @@ const  webpackConfig  = (env):  Configuration  => ({
 
 
 **HotModuleReplacementPlugin**
+This plugin is responsable to enable the hot reload on the development mode, so when we save changes on the code, the browser will be update.
 
-**tsconfig-paths-webpack-plugin**
+file name: `webpack.config.js`
+
+```
+const  webpackConfig  = (env):  Configuration  => ({
+...
+	plugins: [
+	   new webpack.HotModuleReplacementPlugin(),
+	 ],
+...
+});
+```
