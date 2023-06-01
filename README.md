@@ -1,3 +1,4 @@
+
 # Minimal react typescript webpack
 
 Hi! In this project I created a minimal setup for a react project with typescript.
@@ -262,7 +263,7 @@ const  webpackConfig  = (env):  Configuration  => ({
 On the webpack we have a plugin section, in this example we will use some plugins:
 
 **html-webpack-plugin**
-This plugins is responsable to simplify the criation for html files.
+This plugin is responsable to simplify the criation for html files.
 
 `npm i -d html-webpack-plugin`
 
@@ -281,16 +282,25 @@ const  webpackConfig  = (env):  Configuration  => ({
 
 
 **clean-webpack-plugin**
+This plugin is responsable to remove and clean your build folder.
+
+```
+npm install -D clean-webpack-plugin
+```
+
+file name: `webpack.config.js`
+
+```
+const  webpackConfig  = (env):  Configuration  => ({
+...
+	plugins: [
+	   new CleanWebpackPlugin(),
+	 ],
+...
+});
+```
+
 
 **HotModuleReplacementPlugin**
 
 **tsconfig-paths-webpack-plugin**
-
-
-asdasd
-
-
-asd
-
-
-asd
