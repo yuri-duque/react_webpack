@@ -1,4 +1,5 @@
 
+
 # Minimal react typescript webpack
 
 Hi! In this project I created a minimal setup for a react project with typescript.
@@ -183,6 +184,8 @@ To start to configure webpack we need install many dependencies, so execute this
 npm i -D webpack webpack-cli webpack-dev-server @types/node @types/webpack @types/webpack-dev-server
 ```
 
+---
+
 ### Creating a webpack config
 To configure a webpack we need to have a file with all configurations, to inform to browser where is the packs with the js and html, and another things.
 
@@ -198,6 +201,8 @@ const webpackConfig = (env): Configuration => ({
 export default webpackConfig;
 ```
 
+---
+
 ###  Configuring the entry file
 
 The first step for webpack config, we need to set the entry point, what file the webpack will analyse to compile. In our case we will set the `src/index.tsx`.
@@ -210,6 +215,8 @@ const webpackConfig = (env): Configuration => ({
 });
 ...
 ```
+
+---
 
 ### Configuring the module
 On the webpack we need configure the a module section, that the webpack use loaders to build files by modules. 
@@ -258,6 +265,8 @@ const  webpackConfig  = (env):  Configuration  => ({
 });
 ```
 
+---
+
 ### Configure plugins
 
 On the webpack we have a plugin section, in this example we will use some plugins:
@@ -280,6 +289,7 @@ const  webpackConfig  = (env):  Configuration  => ({
 });
 ```
 
+---
 
 **clean-webpack-plugin**
 This plugin is responsable to remove and clean your build folder.
@@ -300,6 +310,7 @@ const  webpackConfig  = (env):  Configuration  => ({
 });
 ```
 
+---
 
 **HotModuleReplacementPlugin**
 This plugin is responsable to enable the hot reload on the development mode, so when we save changes on the code, the browser will be update.
@@ -315,3 +326,78 @@ const  webpackConfig  = (env):  Configuration  => ({
 ...
 });
 ```
+
+
+---
+
+
+So now we will have a webpack.config.json like this:
+
+```
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require('webpack');
+const path = require('path');
+
+module.exports = {
+  entry:  path.resolve(__dirname, './src/index.tsx'),
+  mode: "development",
+  devServer: {
+    port: 3000,
+    open: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx|tsx|ts)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({ // Plugin que simplifica a criação de arquivos HTML para servir seus pacotes.
+      template: path.resolve(__dirname, './public/index.html'), 
+    }),
+    new CleanWebpackPlugin(), // Um plugin webpack para remover / limpar sua (s) pasta (s) de construção.
+    new webpack.HotModuleReplacementPlugin(), // Atualiza o navegador quando houver alterações no código
+  ],
+}
+```
+
+---
+
+### Creating a run script on packege.json
+
+On our packege.json file we need create a command to run the project with webpack.
+
+file name: `packege.json`
+```
+{
+	...
+	"scripts": {
+		 "start": "webpack serve"
+	 },
+	...
+}
+```
+
+---
+
+# Running the project
+Now we can run the project, so we only need run this command:
+
+```
+$ npm run start
+``` 
+
+
+
+
+
