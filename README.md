@@ -1,5 +1,3 @@
-
-
 # Minimal react typescript webpack
 
 Hi! In this project I created a minimal setup for a react project with typescript.
